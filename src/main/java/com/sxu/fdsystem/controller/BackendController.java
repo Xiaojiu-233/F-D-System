@@ -23,7 +23,9 @@ public class BackendController {
     private OrderDishesMapper mapper5;
     @GetMapping("/od")
     public R<List<OrderDishes>> list5 (){
-        return R.success(mapper5.selectList(new LambdaQueryWrapper<>()));
+        LambdaQueryWrapper<OrderDishes> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.orderByAsc(OrderDishes::getOrderId);
+        return R.success(mapper5.selectList(queryWrapper));
     }
 
     //评论

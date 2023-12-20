@@ -177,6 +177,7 @@ function increment(id) {
   var counter =  document.getElementById("c" + id).textContent;
   counter++;
   dish_list.push(id);
+  console.log(dish_list);
   document.getElementById("c" + id).textContent = counter;
 }  
 function decrement(id) {  
@@ -187,6 +188,7 @@ function decrement(id) {
     if (index !== -1) {  
       dish_list.splice(id, 1);  
     }  
+    console.log(dish_list);
     document.getElementById("c" + id).textContent = counter;
   }
 }  
