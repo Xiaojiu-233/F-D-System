@@ -1,0 +1,13 @@
+spring:
+  # 应用名配置
+  application:
+    name: FD_System
+
+# mybatis配置
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+
+# 本项目配置
+image:
+  path: D:\FD_Image\

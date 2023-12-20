@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>餐饮管理系统</title>
+  <link rel="stylesheet" href="/backend/styles.css"> <!-- 引用外部CSS文件 -->
+  <script src="/backend/script.js"></script> <!-- 引用外部JavaScript文件 -->
+  <script src="/backend/chart_script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <header>
+    <h1>餐饮管理系统</h1>
+  </header>
+
+  <div class="container">
+    <nav>
+      <ul>
+        <li><button class="nav-button" onclick="showPage('user','/user/list')">用户管理</button></li>
+        <li><button class="nav-button" onclick="showPage('dish','/dish/list')">餐品管理</button></li>
+        <li><button class="nav-button" onclick="showPage('cat','/category/list')">类别管理</button></li>
+        <li><button class="nav-button" onclick="showPage('orders','/order/list')">订单管理</button></li>
+        <li><button class="nav-button" onclick="showPage('orders_dish','/backend/od')">订购菜品管理</button></li>
+        <li><button class="nav-button" onclick="showPage('table','/table/list')">餐桌管理</button></li>
+        <li><button class="nav-button" onclick="showPage('data')">数据分析</button></li>
+        <!-- 添加其他功能按钮 -->
+      </ul>
+    </nav>
+
+    <section>
+      <!-- 用户管理页面 -->
+      <div id="user" class="page" style="display:block;">
+        <h2 style="margin-right: 50px;">用户管理</h2>
+
+        <table> 
+          <thead>
+            <tr>
+              <th>用户号</th>
+              <th>用户名</th>
+              <th>联系方式</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+
+      </div>
+
+      <section>
+        <!-- 订购菜品管理页面 -->
+        <div id="orders_dish" class="page" style="display:none;">
+          <h2 style="margin-right: 50px;">订购菜品管理</h2>
+  
+          <table> 
+            <thead>
+              <tr>
+                <th>订单号</th>
+                <th>餐品号</th>
+                <th>餐品名</th>
+                <th>餐品价格</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+  
+        </div>
+      
+      <!-- 餐品管理页面 -->
+      <div id="dish" class="page" style="display:none;">
+        <div class="button-group">
+            <h2 style="margin-right: 50px;">餐品管理</h2>
+            <button class="select-btn" style="background-color: #ff6600;" onclick="openForm('addDishModal')">添加餐品</button>
+        </div>
+
+        <table> 
+          <thead>
+            <tr>
+              <th>餐品号</th>
+              <th>餐品名</th>
+              <th>价格</th>
+              <th>图片</th>
+              <th>类别号</th>
+              <th>处理</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+
+        <!-- 添加餐品表单 -->
+        <div class="modal" id="addDishModal">
+            <div class="modal-content">
+            <span class="close" onclick="closeForm('addDishModal')">&times;</span>
+            <h3>填写餐品信息</h3>
+            <form id="addDishForm">
+                <label for="name">餐品名：</label>
+                <input type="text" id="name" name="name" required>
+                <label for="price">价格：</label>
+                <input type="number" id="price" name="price" required step="0.01">
+                <label for="categoryId">类别：</label>
+                <select id="category_select1" name="categoryId" >
+                </select><br>
+                <label for="file">上传图片：</label>
+                <input type="file" id="fileInput1" name="file" accept="image/*">
+                <button type="submit" onclick="formPhotoSubmit('addDishForm','/dish',1)">提交</button>
+            </form>
+            </div>
+        </div>
+
+        <!-- 修改餐品表单 -->
+        <div class="modal" id="updDishModal">
+            <div class="modal-content">
+            <span class="close" onclick="closeForm('updDishModal')">&times;</span>
+            <h3>修改餐品信息</h3>
+            <form id="updDishForm">
+                <label for="dishId">餐品号：</label>
+                <input type="number" id="dishId" name="dishId" required>
+                <label for="name">餐品名：</label>
+                <input type="text" id="name" name="name" required>
+                <label for="price">价格：</label>
+                <input type="number" id="price" name="price" required step="0.01">
+                <label for="categoryId">类别：</label>
+                <select id="category_select2" name="categoryId" >
+                </select><br>
+                <label for="file">上传图片：</label>
+                <input type="file" id="fileInput2" name="file" accept="image/jpg">
+                <button type="submit" onclick="formPhotoSubmit('updDishForm','/dish/update',2)">提交</button>
+            </form>
+            </div>
+        </div>
+        
+      </div>
+
+      <!-- 类别管理页面 -->
+      <div id="cat" class="page" style="display:none;">
+              <div class="button-group">
+                  <h2 style="margin-right: 50px;">类别管理</h2>
+                  <button class="select-btn" style="background-color: #ff6600;" onclick="openForm('addCatModal')">添加类别</button>
+              </div>
+      
+              <table> 
+                <thead>
+                  <tr>
+                    <th>类别号</th>
+                    <th>类别名</th>
+                    <th>类别排序</th>
+                    <th>处理</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+      
+              <!-- 添加类别表单 -->
+              <div class="modal" id="addCatModal">
+                  <div class="modal-content">
+                  <span class="close" onclick="closeForm('addCatModal')">&times;</span>
+                  <h3>填写类别信息</h3>
+                  <form id="addCatForm">
+                      <label for="name">类别名：</label>
+                      <input type="text" id="name" name="name" required>
+                      <label for="sort">类别排序：</label>
+                      <input type="number" id="sort" name="sort" required>
+                      <button type="submit" onclick="formSubmit('addCatForm','/category')">提交</button>
+                  </form>
+                  </div>
+              </div>
+
+              <!-- 修改类别表单 -->
+              <div class="modal" id="updCatModal">
+                  <div class="modal-content">
+                  <span class="close" onclick="closeForm('updCatModal')">&times;</span>
+                  <h3>修改类别信息</h3>
+                  <form id="updCatForm">
+                      <label for="categoryId">类别号：</label>
+                      <input type="number" id="categoryId" name="categoryId" required>
+                      <label for="name">类别名：</label>
+                      <input type="text" id="name" name="name" required>
+                      <label for="sort">类别排序：</label>
+                      <input type="number" id="sort" name="sort" required>
+                      <button type="submit" onclick="formSubmit('updCatForm','/category/update')">提交</button>
+                  </form>
+                  </div>
+              </div>
+              
+      </div>
+      
+      <!-- 订单管理页面 -->
+      <div id="orders" class="page" style="display:none;">
+        <div class="button-group">
+            <h2 style="margin-right: 50px;">订单管理</h2>
+        </div>
+
+        <table> 
+          <thead>
+            <tr>
+              <th>订单号</th>
+              <th>备注</th>
+              <th>预约时间</th>
+              <th>下单时间</th>
+              <th>上菜时间</th>
+              <th>结账时间</th>
+              <th>应付金额</th>
+              <th>实付金额</th>
+              <th>状态</th>
+              <th>用餐人数</th>
+              <th>预定用户号</th>
+              <th>评分</th>
+              <th>评价内容</th>
+              <th>修改</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+
+        <!-- 修改订单表单 -->
+        <div class="modal" id="updOrderModal">
+          <div class="modal-content">
+            <span class="close" onclick="closeForm('updOrderModal')">&times;</span>
+            <h3>修改订单信息</h3>
+            <form id="updOrderForm">
+                <label for="orderId">订单号：</label>
+                <input type="number" id="orderId" name="orderId" required>
+                <label for="pay_amount">实付金额：</label>
+                <input type="number" id="pay_amount" name="pay_amount" required step="0.01">
+                <label for="status">状态：</label>
+                <select id="status" name="status" >
+                  <option value="2">已上菜</option>
+                  <option value="3">已结账</option>
+                </select><br>
+                <button type="submit" onclick="formSubmit('updOrderForm','/order/update')">提交</button>
+            </form>
+            </div>
+        </div>
+        
+      </div>
+
+      <!-- 餐桌管理页面 -->
+      <div id="table" class="page" style="display:none;">
+        <div class="button-group">
+            <h2 style="margin-right: 50px;">餐桌管理</h2>
+            <button class="select-btn" style="background-color: #ff6600;" onclick="openForm('addTableModal')">添加餐桌</button>
+        </div>
+
+        <table> 
+          <thead>
+            <tr>
+              <th>餐桌号</th>
+              <th>使用订单号</th>
+              <th>最大容纳人数</th>
+              <th>当前容纳人数</th>
+              <th>删除</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+          <!-- 添加更多菜品信息 -->
+        </table>
+
+        <!-- 添加餐品表单 -->
+        <div class="modal" id="addTableModal">
+          <div class="modal-content">
+          <span class="close" onclick="closeForm('addTableModal')">&times;</span>
+          <h3>填写餐品信息</h3>
+          <form id="addTableForm">
+              <label for="maxSeats">最大容纳人数：</label>
+              <input type="number" id="maxSeats" name="maxSeats" required>
+              <button type="submit" onclick="formSubmit('addTableForm','/table')">提交</button>
+          </form>
+          </div>
+      </div>
+        
+      </div>
+      
+      <!-- 数据分析界面 -->
+      <div id="data" class="page" style="display:none;">
+        <h2>数据分析</h2>
+        <!-- 员工管理页面内容 -->
+
+        <div class="Ccontainer">
+          <div class="canvas-container">
+            <h3>昨日订单流量</h3><canvas id="myChart1"></canvas>
+          </div>
+          <div class="canvas-container">
+            <h3>昨日客流量</h3><canvas id="myChart2"></canvas>
+          </div>
+          <div class="canvas-container">
+            <h3>前七天订单流量</h3><canvas id="myChart3"></canvas>
+          </div>
+          <div class="canvas-container">
+            <h3>前七天客流量</h3><canvas id="myChart4"></canvas>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </div>
+
+</body>
+</html>

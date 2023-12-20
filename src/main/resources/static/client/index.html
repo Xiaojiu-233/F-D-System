@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录</title>
+    <link rel="stylesheet" href="/client/styles.css">
+    <script src="/client/script.js"></script> <!-- 引用外部JavaScript文件 -->
+</head>
+<body>
+    <div class="login-container">
+        <form id="login-form">
+            <h2>请输入你的信息</h2>
+            <input type="text" name="username" placeholder="名字" required>
+            <input type="text" name="phone" maxlength="11" placeholder="联系方式" required>
+            <button type="submit" onclick="formJumpSubmit('login-form','/user')">登录</button>
+        </form>
+    </div>
+</body>
+</html>
+
+

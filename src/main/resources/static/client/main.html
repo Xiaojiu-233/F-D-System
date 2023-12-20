@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>餐饮管理系统客户端</title>
+    <link rel="stylesheet" href="/client/mainstyle.css"> <!-- 引用外部CSS文件 -->
+    <script src="/client/script.js"></script> <!-- 引用外部JavaScript文件 -->
+</head>
+<body>
+    <header>
+        <div class="header-text">
+            <h1>餐饮系统客户端</h1>
+            <p style="font-size: 30px;">一个美味的选择</p>
+        </div>
+    </header>
+    <div class="nav-buttons">
+        <button onclick="showContent('order')">点菜</button>
+        <button onclick="showContent('view-reviews')">查看评价</button>
+        <button onclick="showContent('write-review')">写评价</button>
+    </div>
+
+    <div id="order-content" class="content">
+        <!-- 点菜内容 -->
+        <div class="menu-container">
+            <div class="category-list">
+                <div id="mycat" class="categories">
+                </div>
+            </div>
+            <div class="dishes-list">
+                <div id="mydish" class="category">
+                </div>
+            </div>
+            
+        </div>
+        <button class="order-button"  onclick="showOrderDetails()">下订单</button>
+
+        <div class="order-details">
+            <div class="order-popup" id="orderPopup">
+                <form id="order-form" class="order-content">
+                    <span class="close" onclick="closeOrderDetails()">&times;</span>
+                    <h2>订单详情</h2>
+                    <p id="selectedDishes"></p>
+                    <p id="totalAmount"></p>
+                    <label for="peopleNum">人数</label>
+                    <input type="number" name="peopleNum" required>
+                    <br>
+                    <label for="preorderTime">预约时间</label>
+                    <input type="datetime-local" name="preorderTime"  name="preorderTime"  required>
+                    <br>
+                    <label for="amount">付款</label>
+                    <input type="number" name="amount" required step="0.01" required>
+                    <br>
+                    <label >备注</label>
+                    <textarea id="orderNote" placeholder="写备注"></textarea>
+                    <button onclick="submitOrder()">提交</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="view-reviews-content" class="content" style="display: none;">
+        <!-- 查看评价内容 -->
+        <div class="bigger-container">
+            <div class="comment-list">
+                <div id="mycomment" class="category">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="write-review-content" class="content" style="display: none;">
+        <!-- 写评价内容 -->
+        <div class="bigger-container">
+            <div class="comment-list">
+                <div id="mycom" class="category">
+                  
+                </div>
+            </div>
+        </div>
+
+        <!-- 弹出窗口 -->
+        <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="cclose" onclick="CommentClose()">&times;</span>
+            <h2>提交评价</h2>
+            <p>请评下你的星级：</p>
+            <p>1-5</p>
+            <div class="rating">
+                <input type="radio" id="star5" name="rating" value="2" /><label for="star5" title="5星"></label>
+                <input type="radio" id="star4" name="rating" value="3" /><label for="star4" title="4星"></label>
+                <input type="radio" id="star3" name="rating" value="4" /><label for="star3" title="3星"></label>
+                <input type="radio" id="star2" name="rating" value="5" /><label for="star2" title="2星"></label>
+                <input type="radio" id="star1" name="rating" value="6" /><label for="star1" title="1星"></label>
+            </div>
+            <p></p>
+            <p>写下你的评论：</p>
+            <textarea id="review-text" placeholder="写下您的评价"></textarea>
+            <button id="submit-rating" onclick="CommentSubmit()">提交</button>
+        </div>
+        </div>
+    </div>
+    
+</body>
+</html>

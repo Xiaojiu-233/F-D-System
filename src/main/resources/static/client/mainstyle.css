@@ -1,0 +1,457 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+header {
+    width: 100%;
+    height: 20%;
+    background-color: #ffA500;
+    color: #fff;
+    padding: 20px;
+    box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.header-text {
+    text-align: left;
+    font-size: 20px;
+}
+
+.nav-buttons {
+    position: fixed;
+    top: 15%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.nav-buttons button {
+    padding: 20px 40px; /* 调整按钮大小 */
+    border: none;
+    border-radius: 5px;
+    background-color: #ccc;
+    color: #fff;
+    color: #333;
+    font-size: 24px;
+    cursor: pointer;
+    margin-right: 10px; /* 按钮之间的间距 */
+    transition: background-color 0.3s ease;
+}
+
+.nav-buttons button:hover {
+    background-color: #999;
+}
+
+.content {
+    position: fixed;
+    top: 23%; /* 调整向下偏移量 */
+    font-size: 20px;
+}
+
+.menu-container {
+    margin: 2%;
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    height: 60%;
+    width: 96%;
+}
+
+.bigger-container {
+    margin: 2%;
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    height: 70%;
+    width: 96%;
+}
+
+.category-list{
+    width: 20%; /* 调整宽度 */
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.dishes-list {
+    width: 80%; /* 调整宽度 */
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.comment-list {
+    width: 100%; /* 调整宽度 */
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.category-list {
+    background-color: #fff;
+    border-right: 1px solid #ddd;
+}
+
+.category-list h2, .dishes-list h2 {
+    margin-top: 0;
+    font-size: 20px;
+    color: #333;
+}
+
+.category-list ul {
+    padding-left: 0;
+}
+
+.category-list ul li {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #666;
+}
+
+.category-list ul li a {
+    text-decoration: none;
+    color: #666;
+    transition: color 0.3s ease;
+}
+
+.category-list ul li a:hover {
+    color: #000;
+}
+
+.categories {
+    display: flex;
+    flex-direction: column;
+}
+
+.categories button {
+    margin-bottom: 10px;
+    padding: 20px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ccc;
+    color: #333;
+    font-size: 24px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.categories button:hover {
+    background-color: #999;
+}
+
+.dish {
+    position: relative;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.dish img {
+    width: 40%;
+    height: 40%;
+    border-radius: 5px;
+    margin-right: 20px;
+}
+
+.dish-info {
+    flex: 1;
+    font-size: 28px;
+}
+
+.dish-info h4, .dish-info p {
+    margin: 0;
+}
+
+.checkbox-container {
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.checkbox {
+    display: none;
+}
+
+.checkmark {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border: 3px solid #666;
+    border-radius: 3px;
+}
+
+.checkbox:checked + .checkmark {
+    background-color: #ffA500;
+}
+
+.order-button {
+    position: fixed;
+    margin: 5%;
+    top:84%;
+    height: 8%;
+    font-size: 30px;
+    display: block;
+    width: 90%; /* 调整宽度 */
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    background-color: #FF5733; /* 橘红色 */
+    color: white;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.order-button:hover {
+    background-color: #FF7748; /* 悬停时颜色 */
+}
+
+/* 略去前面的样式 */
+#selectedDishes {
+    height: 200px;
+    overflow-y:scroll;
+}
+
+.order-details {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.order-popup {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 8px;
+    font-size: 35px;
+    width: 60%;
+    height: 70%;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 50px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.order-content textarea {
+    width: 90%;
+    height: 100px; /* 可根据需要调整高度 */
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+    resize: none;
+    font-size: 40px;
+}
+
+.order-content input {
+    width: 90%;
+    height: 40px;
+    font-size: 30px;
+}
+
+.order-content button {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+    background: linear-gradient(135deg, #FF5733, #FF7748); /* 橙到橘红的渐变色 */
+    align-self: center; /* 居中对齐 */
+}
+
+.order-content button:hover {
+    background: linear-gradient(135deg, #FF7748, #FF5733); /* 悬停时渐变色反转 */
+}
+
+/* 略去前面的样式 */
+
+.review-box {
+    width: 95%;
+    height: 43%;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.rating {
+    margin-bottom: 10px;
+}
+
+.star {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    background-image: url('https://img1.baidu.com/it/u=1094767654,3983153450&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=375'); /* 替换为你的星星图标路径 */
+    background-size: cover;
+}
+
+.review-text {
+    font-size: 32px;
+    line-height: 1.5;
+}
+
+/* 略去前面的样式 */
+
+.my-order {
+    width: 93%;
+    height: 30%;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    display: flex;
+    font-size: 25px;
+    flex-direction: column;
+}
+
+.my-order h2 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.my-order p {
+    margin: 5px 0;
+}
+
+.submit-review {
+    align-self: flex-end;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 30px;
+    background-color: #FF5733;
+    color: white;
+    cursor: pointer;
+}
+
+/* 略去前面的样式 */
+
+/* 弹出窗口样式 */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6);
+    text-align: center; /* 居中文本 */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 70%;
+    height: 60%;
+    font-size: 30px; /* 放大字体 */
+}
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+.modal-content textarea {
+    width: 90%;
+    height: 100px; /* 可根据需要调整高度 */
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+    resize: none;
+    font-size: 40px;
+}
+
+.modal-content button {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+    background: linear-gradient(135deg, #FF5733, #FF7748); /* 橙到橘红的渐变色 */
+    align-self: center; /* 居中对齐 */
+}
+
+.modal-content button:hover {
+    background: linear-gradient(135deg, #FF7748, #FF5733); /* 悬停时渐变色反转 */
+}
+
+.modal-content input[type="radio"] {
+    transform: scale(2.5); /* 调整缩放比例 */
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.button-box {  
+    display: flex;  
+    justify-content: space-between;  
+    align-items: center;  
+    border: 1px solid black;  
+    font-size: 35px;
+    padding: 10px;  
+    
+  }  
+  .button-box button {  
+    margin-left: 10px;
+    margin-right: 10px; 
+    font-size: 30px; 
+  }  
+
